@@ -1,0 +1,40 @@
+/* iteraSim brand palette — matches the app UI and the PDF guide. */
+:root {
+  --md-primary-fg-color:        #fd8d14;
+  --md-primary-fg-color--light: #ffa94d;
+  --md-primary-fg-color--dark:  #d9730a;
+  --md-accent-fg-color:         #8B5CF6;   /* violet from the logo */
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #fd8d14;
+  --md-accent-fg-color:  #a78bfa;
+  --md-default-bg-color: #0f1115;
+}
+
+/* Screenshots: frame them so they read as UI captures, not inline art. */
+.md-typeset figure img,
+.md-typeset img {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  max-width: 100%;
+}
+/* The site logo in the header is not a screenshot — no frame. */
+.md-header img, .md-logo img { border: none; box-shadow: none; }
+
+/* Figure captions. Targeted at <figcaption>, NOT at <em>: CSS :only-child
+   ignores text nodes, so an em:only-child rule also matched ordinary emphasis
+   inside a paragraph and threw single italic words onto their own line. */
+.md-typeset figure { margin: 1.2rem 0; }
+.md-typeset figcaption {
+  display: block;
+  max-width: none;
+  font-size: .72rem;
+  line-height: 1.55;
+  color: var(--md-default-fg-color--light);
+  text-align: center;
+  margin: .45rem auto 0;
+}
+
+/* Wide tables scroll instead of pushing the page sideways. */
+.md-typeset__table { overflow-x: auto; }

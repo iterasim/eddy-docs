@@ -1,0 +1,1161 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="End-user guide for iteraSim Eddy, the AI copilot for OpenFOAM CFD.">
+      
+      
+        <meta name="author" content="iteraSim">
+      
+      
+        <link rel="canonical" href="https://iterasim.github.io/eddy-docs/troubleshooting/">
+      
+      
+        <link rel="prev" href="../upgrading-to-pro/">
+      
+      
+        <link rel="next" href="../frequently-asked-questions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>6 Troubleshooting - iteraSim Eddy — User Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/brand.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-troubleshooting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="iteraSim Eddy — User Guide" class="md-header__button md-logo" aria-label="iteraSim Eddy — User Guide" data-md-component="logo">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iteraSim Eddy — User Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6 Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard="" data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="iteraSim Eddy — User Guide" class="md-nav__button md-logo" aria-label="iteraSim Eddy — User Guide" data-md-component="logo">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    iteraSim Eddy — User Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../first-launch-account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 First launch &amp; account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tour-of-the-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 Tour of the interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Common workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading-to-pro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Upgrading to Pro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#the-app-window-is-blank-or-black" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The app window is blank or black
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eddy-doesnt-appear-in-my-applications-menu-after-first-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eddy doesn't appear in my applications menu after first launch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-moved-the-appimage-and-now-the-menu-icon-does-nothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I moved the AppImage and now the menu icon does nothing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openfoam-not-found-in-the-status-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "OpenFOAM: not found" in the status bar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copilot-says-no-api-key-configured-but-im-on-pro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copilot says "No API key configured" — but I'm on Pro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copilot-says-monthly-token-cap-reached" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copilot says "monthly token cap reached"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#billing-is-not-configured-when-clicking-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Billing is not configured" when clicking Upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solver-runs-but-residuals-arent-plotting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solver runs but residuals aren't plotting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hpc-cluster-permission-denied-publickey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HPC cluster: "Permission denied (publickey)"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-command-fails-with-blockmesh-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A command fails with "blockMesh: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-case-dies-instantly-with-a-dictionary-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The case dies instantly with a dictionary error
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solver-starts-then-diverges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The solver starts, then diverges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copilot-replied-instantly-with-a-case-summary-instead-of-answering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copilot replied instantly with a case summary instead of answering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations-in-this-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known limitations in this release
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frequently-asked-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../support-community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 Support &amp; community
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix-files-and-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix — files and paths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#the-app-window-is-blank-or-black" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The app window is blank or black
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eddy-doesnt-appear-in-my-applications-menu-after-first-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eddy doesn't appear in my applications menu after first launch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-moved-the-appimage-and-now-the-menu-icon-does-nothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I moved the AppImage and now the menu icon does nothing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openfoam-not-found-in-the-status-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "OpenFOAM: not found" in the status bar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copilot-says-no-api-key-configured-but-im-on-pro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copilot says "No API key configured" — but I'm on Pro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copilot-says-monthly-token-cap-reached" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copilot says "monthly token cap reached"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#billing-is-not-configured-when-clicking-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Billing is not configured" when clicking Upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solver-runs-but-residuals-arent-plotting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solver runs but residuals aren't plotting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hpc-cluster-permission-denied-publickey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HPC cluster: "Permission denied (publickey)"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-command-fails-with-blockmesh-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A command fails with "blockMesh: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-case-dies-instantly-with-a-dictionary-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The case dies instantly with a dictionary error
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solver-starts-then-diverges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The solver starts, then diverges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copilot-replied-instantly-with-a-case-summary-instead-of-answering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copilot replied instantly with a case summary instead of answering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations-in-this-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known limitations in this release
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-troubleshooting">6 Troubleshooting<a class="headerlink" href="#6-troubleshooting" title="Permanent link">¶</a></h1>
+<p><em>The most common gotchas, and how to fix them.</em></p>
+<h3 id="the-app-window-is-blank-or-black">The app window is blank or black<a class="headerlink" href="#the-app-window-is-blank-or-black" title="Permanent link">¶</a></h3>
+<p>Usually a GPU driver issue on older Intel or Nvidia cards. Launch Eddy with software rendering:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./iteraSim-Eddy-1.0.0.AppImage<span class="w"> </span>--disable-gpu
+</code></pre></div>
+<h3 id="eddy-doesnt-appear-in-my-applications-menu-after-first-launch">Eddy doesn't appear in my applications menu after first launch<a class="headerlink" href="#eddy-doesnt-appear-in-my-applications-menu-after-first-launch" title="Permanent link">¶</a></h3>
+<p>Some desktop environments (older Xfce, i3, sway) don't auto-refresh their app cache. Force a refresh:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>update-desktop-database ~/.local/share/applications
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>gtk-update-icon-cache -t ~/.local/share/icons/hicolor 2&gt;/dev/null || true
+</code></pre></div>
+<p>Log out and back in if it still doesn't appear. On GNOME and KDE Plasma the menu updates within a few seconds of first launch — no action needed.</p>
+<h3 id="i-moved-the-appimage-and-now-the-menu-icon-does-nothing">I moved the AppImage and now the menu icon does nothing<a class="headerlink" href="#i-moved-the-appimage-and-now-the-menu-icon-does-nothing" title="Permanent link">¶</a></h3>
+<p>The .desktop entry still points at the old location. Launch the AppImage once from its new folder — Eddy detects the move and rewrites the menu entry automatically.</p>
+<h3 id="openfoam-not-found-in-the-status-bar">"OpenFOAM: not found" in the status bar<a class="headerlink" href="#openfoam-not-found-in-the-status-bar" title="Permanent link">¶</a></h3>
+<p>Your OpenFOAM install isn't on the login-shell PATH. Two fixes:</p>
+<ul>
+<li>Install via package manager (see section 1.4).</li>
+<li>Or edit your ~/.bashrc to source the OpenFOAM etc/bashrc — Eddy detects any version whose bashrc is sourced.</li>
+</ul>
+<h3 id="copilot-says-no-api-key-configured-but-im-on-pro">Copilot says "No API key configured" — but I'm on Pro<a class="headerlink" href="#copilot-says-no-api-key-configured-but-im-on-pro" title="Permanent link">¶</a></h3>
+<p>This message is misleading, and it catches Pro users in particular.
+<strong>It is usually not about your API key at all.</strong> It means Eddy's local
+backend is not running.</p>
+<p>Look at the status bar at the bottom of the window. If it reads <strong>○ Offline</strong>
+(grey) rather than <strong>● Ready</strong> (green), that is the real problem. The
+<strong>LOCAL</strong> badge instead of <strong>LIVE</strong> says the same thing.</p>
+<p><strong>Why a Pro subscriber sees it.</strong> Your Pro plan's managed model access is
+served <em>through the local backend</em> — a small Python service Eddy starts for you
+on <code>127.0.0.1:8000</code>. When that service isn't running, Eddy falls back to a
+second path: talking to a model provider directly using a key stored on your
+machine. If you never set a personal key — and Pro users have no reason to —
+that fallback has nothing to use, and reports the missing key rather than the
+missing backend. Your subscription and token balance are untouched; the status
+bar still shows <strong>PRO</strong> and your remaining tokens.</p>
+<p><strong>The fix, in order:</strong></p>
+<ol>
+<li>Click <strong>⟳ Start Backend</strong> in the message. Give it five to ten seconds. The
+   status bar should flip to <strong>● Ready</strong> and the badge to <strong>LIVE</strong>. Re-send
+   your question.</li>
+<li>
+<p>If it stays Offline, check whether something else holds port 8000:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:8000/api/health
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ss<span class="w"> </span>-ltnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">8000</span>
+</code></pre></div>
+<p>A healthy backend answers the first command. If a different program owns
+the port, close it and press Start Backend again.</p>
+</li>
+<li>
+<p>Still Offline — restart Eddy completely. The backend is started
+   automatically at launch, so a clean start usually recovers it.</p>
+</li>
+<li>Check <strong>AI Extensions</strong> (the lightning-bolt icon). The panel has its own
+   <strong>⟳ Restart Backend</strong> button and shows the last startup error, which tells
+   you <em>why</em> it failed rather than just that it did.</li>
+</ol>
+<p><strong>Common reasons the backend isn't up:</strong></p>
+<ul>
+<li><strong>First launch after install</strong> — Python dependencies are still unpacking.
+  Wait a minute and press Start Backend.</li>
+<li><strong>Port 8000 already in use</strong> — another dev server, or a previous Eddy that
+  didn't exit cleanly.</li>
+<li><strong>A second Eddy is already running</strong> — only one instance can hold the port.</li>
+<li><strong>Firewall or endpoint security</strong> blocking loopback connections. The backend
+  is local-only and never listens on an external interface; allow
+  <code>127.0.0.1:8000</code>.</li>
+</ul>
+<p><strong>Working deliberately offline?</strong> Then the message means what it says. Open
+<strong>AI Extensions</strong>, add a key for Google Gemini, Anthropic, OpenAI or OpenRouter,
+or point Eddy at a local Ollama model. That path bypasses the backend entirely
+and works with no network at all. Keys are stored in your OS keyring, never in
+plaintext and never on our servers.</p>
+<div class="admonition note">
+<p class="admonition-title">Which path am I on?</p>
+<p><strong>● Ready / LIVE</strong> — the backend is serving requests. Pro users are on
+managed models and metered tokens.
+<strong>○ Offline / LOCAL</strong> — the backend is down. Eddy uses a personal key if you
+have one, and the local CFD expert for solver questions if you don't.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Everything that is not the copilot keeps working while the backend is
+offline: the Case Builder, blockMesh, snappyHexMesh, Gmsh, running the
+solver and the ParaView handoff are all local. An Offline badge costs you
+the AI, not the simulation.</p>
+</div>
+<h3 id="copilot-says-monthly-token-cap-reached">Copilot says "monthly token cap reached"<a class="headerlink" href="#copilot-says-monthly-token-cap-reached" title="Permanent link">¶</a></h3>
+<p>You've used all 50,000 free tokens for this calendar month. Either wait for the 1<sup>st</sup> of next month, or upgrade to Pro (section 5).</p>
+<h3 id="billing-is-not-configured-when-clicking-upgrade">"Billing is not configured" when clicking Upgrade<a class="headerlink" href="#billing-is-not-configured-when-clicking-upgrade" title="Permanent link">¶</a></h3>
+<p>This means the deployment hasn't wired Stripe yet. If you're the administrator, see <strong>BUILD_LINUX.md</strong> in the source tree. If you're an end user, email info@iterasim.in — we'll send you a one-off invoice.</p>
+<h3 id="solver-runs-but-residuals-arent-plotting">Solver runs but residuals aren't plotting<a class="headerlink" href="#solver-runs-but-residuals-arent-plotting" title="Permanent link">¶</a></h3>
+<p>Eddy needs to see the solver's stdout to plot residuals. If you launched the solver from an external terminal instead of the in-app Run button, the plot panel will stay empty. Use <strong>Run</strong> in the toolbar.</p>
+<h3 id="hpc-cluster-permission-denied-publickey">HPC cluster: "Permission denied (publickey)"<a class="headerlink" href="#hpc-cluster-permission-denied-publickey" title="Permanent link">¶</a></h3>
+<p>Your SSH key isn't on the cluster. Either:</p>
+<ul>
+<li>Copy your key manually: ssh-copy-id -i ~/.ssh/id_ed25519.pub user@cluster.example.com.</li>
+<li>Or set the <strong>Password</strong> field in the SSH profile — Eddy will use it via sshpass.</li>
+</ul>
+<h3 id="a-command-fails-with-blockmesh-command-not-found">A command fails with "blockMesh: command not found"<a class="headerlink" href="#a-command-fails-with-blockmesh-command-not-found" title="Permanent link">¶</a></h3>
+<p>The terminal is sourcing an OpenFOAM tree that has not been compiled. This happens when more than one OpenFOAM lives on the machine — typically a source checkout alongside a built install — and the version selector in the title bar is pointing at the wrong one.</p>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../screenshots/12_blockmesh_error.png" data-desc-position="bottom"><img alt="The symptom: the command runs in the right directory but the binary is not on PATH. The line above it is the giveaway — No completions for …/platforms/linux64GccDPInt32Opt/bin means that install has no compiled binaries." src="../screenshots/12_blockmesh_error.png"></a>
+<br>
+<figcaption>The symptom: the command runs in the right directory but the binary is not on PATH. The line above it is the giveaway — <em>No completions for …/platforms/linux64GccDPInt32Opt/bin</em> means that install has no compiled binaries.</figcaption>
+</figure>
+<p>Pick the built installation from the OpenFOAM dropdown in the title bar. To see which of your trees is actually built, check for a solver binary:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ls $WM_PROJECT_DIR/platforms/*/bin/blockMesh
+</code></pre></div>
+<h3 id="the-case-dies-instantly-with-a-dictionary-error">The case dies instantly with a dictionary error<a class="headerlink" href="#the-case-dies-instantly-with-a-dictionary-error" title="Permanent link">¶</a></h3>
+<p>OpenFOAM is strict about which keywords a solver expects. The three you are most likely to meet, and what each means:</p>
+<ul>
+<li>Entry 'PISO' not found — the pressure–velocity block does not match the solver family. icoFoam and pisoFoam read a PISO block, pimpleFoam and its relatives a PIMPLE block, and the steady solvers a SIMPLE block.</li>
+<li>Unable to set reference cell for field p — a fully enclosed domain, where every boundary is a wall, has no pressure datum. Add pRefCell 0; pRefValue 0; to that block.</li>
+<li>writeInterval &lt; 1 for writeControl timeStep — a steady run counts writes in iterations, so the interval must be a whole number. Fractional intervals belong to transient runs using writeControl runTime.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cases written by the Case Builder already carry all three settings. You will only hit these when editing dictionaries by hand or importing a case from elsewhere.</p>
+</div>
+<h3 id="the-solver-starts-then-diverges">The solver starts, then diverges<a class="headerlink" href="#the-solver-starts-then-diverges" title="Permanent link">¶</a></h3>
+<p>Work through it in this order — it is almost always the first item:</p>
+<ul>
+<li><strong>Courant number.</strong> Keep it below 1, and nearer 0.3 for transient runs. Halve the time step and see whether the blow-up moves.</li>
+<li><strong>Mesh quality.</strong> Run checkMesh; high non-orthogonality or skewness needs matching corrections in fvSchemes.</li>
+<li><strong>Numerics.</strong> Drop the preset to <em>robust</em> (first-order upwind). If that converges, the problem is scheme choice, not the case setup.</li>
+<li><strong>Boundary conditions.</strong> An over-constrained pressure field — for instance a fixed value at both inlet and outlet — will not converge.</li>
+</ul>
+<h3 id="copilot-replied-instantly-with-a-case-summary-instead-of-answering">Copilot replied instantly with a case summary instead of answering<a class="headerlink" href="#copilot-replied-instantly-with-a-case-summary-instead-of-answering" title="Permanent link">¶</a></h3>
+<p>A reply that arrives in under a second did not come from the AI. It came from a built-in shortcut, usually a case lookup triggered by a keyword in your message. Rephrase it as a question — start with <em>which</em>, <em>what</em> or <em>how</em> — and ask again. Questions get answered; instructions such as <em>"set up a cavity case"</em> deliberately drive the case pipeline instead.</p>
+<h3 id="known-limitations-in-this-release">Known limitations in this release<a class="headerlink" href="#known-limitations-in-this-release" title="Permanent link">¶</a></h3>
+<p>Worth knowing before you plan work around them:</p>
+<ul>
+<li><strong>Compressible and buoyant cases.</strong> rhoSimpleFoam, rhoPimpleFoam, buoyantSimpleFoam and buoyantPimpleFoam appear in the Case Builder but it does not yet write constant/thermophysicalProperties, so those cases need that file added by hand before they will run.</li>
+<li><strong>Free-form solver generation.</strong> Asking Copilot to add an arbitrary equation to any solver is not yet reliable — the generated C++ can reference OpenFOAM API that does not exist. The built-in recipes, such as adding passive temperature transport to simpleFoam, do compile dependably.</li>
+<li><strong>Copilot advises, it does not compute.</strong> Ask it to run an analysis over your files — a mesh-convergence study, say — and you get a method and a script, not computed numbers. Run the script yourself.</li>
+<li><strong>Knowledge retrieval is offline.</strong> Answers come from the language model's own knowledge rather than an indexed OpenFOAM corpus, so verify specific API details against the OpenFOAM source.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../upgrading-to-pro/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5 Upgrading to Pro">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                5 Upgrading to Pro
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../frequently-asked-questions/" class="md-footer__link md-footer__link--next" aria-label="Next: 7 FAQ">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                7 FAQ
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © iteraSim — Navigating Possibilities in Fluid Dynamics
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
