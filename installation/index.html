@@ -394,6 +394,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#if-you-need-to-re-run-the-wizard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If you need to re-run the wizard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-different-wsl-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using a different WSL distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstall_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uninstall
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -716,6 +749,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#if-you-need-to-re-run-the-wizard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If you need to re-run the wizard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-different-wsl-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using a different WSL distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstall_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uninstall
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -750,53 +816,181 @@
 
 
 <h1 id="1-installation">1 Installation<a class="headerlink" href="#1-installation" title="Permanent link">¶</a></h1>
-<p><em>Linux only in this guide. Windows users: see IteraSim_Windows_Build_Guide.pdf.</em></p>
+<p><em>Covers <strong>Linux</strong> and <strong>Windows</strong>. The tab matching your system is selected
+automatically — switch freely if you're setting up a different machine.</em></p>
+<div class="admonition note">
+<p class="admonition-title">macOS</p>
+<p>Not supported yet; it's on the roadmap. Until then Eddy runs on Linux under
+UTM or Parallels, or on any machine you can reach over SSH.
+Email info@iterasim.in to be told when the first build ships.</p>
+</div>
 <h2 id="11-system-requirements">1.1 System requirements<a class="headerlink" href="#11-system-requirements" title="Permanent link">¶</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux</label><label for="__tabbed_1_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ul>
 <li>A 64-bit Linux distribution (Ubuntu 22.04+, Fedora 39+, Debian 12+, or equivalent).</li>
 <li>glibc 2.35 or newer.</li>
 <li>At least 4 GB RAM (8 GB recommended for meshing).</li>
-<li>OpenFOAM v2312 or later installed (native or via apt install openfoam). Eddy detects it automatically at startup.</li>
+<li>OpenFOAM v2312 or later installed (native or via <code>apt install openfoam</code>).
+  Eddy detects it automatically at startup.</li>
 <li>Internet connection for the AI copilot. The solver itself runs fully offline.</li>
 </ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Windows 10 or 11, 64-bit.</li>
+<li><strong>WSL2</strong> — the Windows Subsystem for Linux. If you don't have it, the
+  first-run wizard installs it for you (needs admin rights and one restart).</li>
+<li>At least 8 GB RAM. WSL and the solver share your memory.</li>
+<li>Roughly 10 GB free disk for Ubuntu, OpenFOAM and the Python engine.</li>
+<li><strong>You do not install OpenFOAM yourself.</strong> The wizard provisions it inside
+  WSL from <code>dl.openfoam.com</code>.</li>
+<li>Internet connection for the AI copilot and for first-run provisioning.</li>
+</ul>
+</div>
+</div>
+</div>
 <h2 id="12-download">1.2 Download<a class="headerlink" href="#12-download" title="Permanent link">¶</a></h2>
-<p>Download the single-file installer from your account page or a link provided by iteraSim. The file is called:</p>
+<p>Both builds are on the <a href="https://github.com/iterasim/eddy-releases/releases/latest">releases page</a>,
+or straight from the website.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Linux</label><label for="__tabbed_2_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="md-button md-button--primary" href="https://www.iterasim.in/download/eddy-linux"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"></path></svg></span> Download the AppImage · 173 MB</a></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>iteraSim-Eddy-1.0.0.AppImage
 </code></pre></div>
-<p>This is a fully self-contained AppImage. No apt install, no root, no dependencies to unpack — the app runs on any modern Linux distribution straight out of the file.</p>
-<h2 id="13-install-and-launch">1.3 Install and launch<a class="headerlink" href="#13-install-and-launch" title="Permanent link">¶</a></h2>
-<p>Move the AppImage somewhere permanent first — a good choice is ~/Applications/. Then open a terminal in that folder and run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/Applications
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mv<span class="w"> </span>iteraSim-Eddy-1.0.0.AppImage<span class="w"> </span>~/Applications/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>~/Applications/iteraSim-Eddy-1.0.0.AppImage
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>~/Applications/iteraSim-Eddy-1.0.0.AppImage
+<p>A fully self-contained AppImage. No apt install, no root, no dependencies to
+unpack — it runs on any modern Linux distribution straight out of the file.</p>
+</div>
+<div class="tabbed-block">
+<p><a class="md-button md-button--primary" href="https://www.iterasim.in/download/eddy-windows"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"></path></svg></span> Download the installer · 113 MB</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>iteraSim-Eddy-Setup-1.0.0.exe
 </code></pre></div>
-<p>That is the entire installation. The main window opens directly. There is no separate installer step — <strong>the AppImage <em>is</em> the app</strong>.</p>
+<p>A single NSIS installer. It installs <strong>per-user</strong>, so the install itself
+needs no admin rights — only the WSL step later does.</p>
+</div>
+</div>
+</div>
+<p>Verify your download against the checksum published on the release page:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Linux</label><label for="__tabbed_3_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sha256sum<span class="w"> </span>iteraSim-Eddy-1.0.0.AppImage
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Get-FileHash</span> <span class="p">.\</span><span class="n">iteraSim-Eddy-Setup</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">exe</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="13-install-and-launch">1.3 Install and launch<a class="headerlink" href="#13-install-and-launch" title="Permanent link">¶</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Linux</label><label for="__tabbed_4_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Move the AppImage somewhere permanent first — <code>~/Applications/</code> is a good
+choice. Then, in a terminal in that folder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/Applications
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mv<span class="w"> </span>iteraSim-Eddy-1.0.0.AppImage<span class="w"> </span>~/Applications/
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>~/Applications/iteraSim-Eddy-1.0.0.AppImage
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>~/Applications/iteraSim-Eddy-1.0.0.AppImage
+</code></pre></div>
+<p>That is the entire installation. The main window opens directly. There is no
+separate installer step — <strong>the AppImage <em>is</em> the app</strong>.</p>
 <h3 id="automatic-system-menu-integration">Automatic system-menu integration<a class="headerlink" href="#automatic-system-menu-integration" title="Permanent link">¶</a></h3>
-<p>On its <strong>first launch</strong>, Eddy registers itself with your Linux desktop environment: it writes a .desktop entry into ~/.local/share/applications/ and copies the logo into ~/.local/share/icons/hicolor/. From that point on, <strong>iteraSim Eddy appears in your Activities / Applications menu with its icon</strong> — you can pin it to the dock and launch it like any other installed program. No terminal required after the first run.</p>
+<p>On its <strong>first launch</strong>, Eddy registers itself with your desktop environment:
+it writes a <code>.desktop</code> entry into <code>~/.local/share/applications/</code> and copies
+the logo into <code>~/.local/share/icons/hicolor/</code>. From then on <strong>iteraSim Eddy
+appears in your Activities / Applications menu with its icon</strong> — pin it to
+the dock and launch it like any other program. No terminal after the first run.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you move the AppImage to a different folder later, launch it once from the new location. Eddy detects the move and updates the menu entry automatically.</p>
+<p>If you move the AppImage to a different folder later, launch it once from
+the new location. Eddy detects the move and updates the menu entry
+automatically.</p>
 </div>
 <h3 id="uninstall">Uninstall<a class="headerlink" href="#uninstall" title="Permanent link">¶</a></h3>
-<p>Because nothing was installed system-wide, uninstalling is three deletions:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm<span class="w"> </span>~/Applications/iteraSim-Eddy-1.0.0.AppImage
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>rm<span class="w"> </span>~/.local/share/applications/iterasim-eddy.desktop
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>rm<span class="w"> </span>~/.local/share/icons/hicolor/512x512/apps/iterasim-eddy.png
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Optional: also remove your local settings + cases</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.iterasim<span class="w"> </span>~/.config/iteraSim
+<p>Nothing was installed system-wide, so uninstalling is three deletions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rm<span class="w"> </span>~/Applications/iteraSim-Eddy-1.0.0.AppImage
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>rm<span class="w"> </span>~/.local/share/applications/iterasim-eddy.desktop
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>rm<span class="w"> </span>~/.local/share/icons/hicolor/512x512/apps/iterasim-eddy.png
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Optional: also remove your local settings + cases</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.iterasim<span class="w"> </span>~/.config/iteraSim
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Run <code>iteraSim-Eddy-Setup-1.0.0.exe</code>. It installs into your local app folder
+— per-user, no admin prompt for this step.</p>
+<p>On <strong>first launch</strong> a setup wizard opens and walks through three steps. This
+happens once; afterwards the app goes straight to the UI.</p>
+<p><strong>Step 1 — WSL &amp; Ubuntu.</strong> If WSL isn't present, click <em>Install WSL &amp;
+Ubuntu</em>. This runs <code>wsl --install -d Ubuntu</code>, which <strong>needs admin rights and
+a restart</strong>. Reboot, then reopen IteraSim and the wizard resumes.</p>
+<p><strong>Step 2 — Python engine &amp; OpenFOAM.</strong> Click <em>Install Python &amp; OpenFOAM</em>.
+Inside Ubuntu this installs the apt packages, creates a Python virtual
+environment at <code>~/.iterasim/venv</code> with the backend dependencies, and fetches
+OpenFOAM from <code>dl.openfoam.com</code>. It takes several minutes and downloads a
+few GB — leave it running.</p>
+<p><strong>Step 3 — Launch.</strong> The backend starts inside WSL and the app opens.</p>
+<div class="admonition note">
+<p class="admonition-title">Where your files live</p>
+<p>Cases are stored at <code>C:\Users\&lt;you&gt;\IteraSim</code>, which is the same folder
+as <code>/mnt/c/Users/&lt;you&gt;/IteraSim</code> inside WSL. You can open them from
+Windows Explorer and from Linux tools interchangeably.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">How it fits together</p>
+<p>The app runs natively on Windows; OpenFOAM and the Python backend run in
+WSL. They talk over <code>http://127.0.0.1:8000</code> — WSL2 forwards localhost, so
+this is invisible in normal use. If the status bar ever reads <strong>Offline</strong>,
+it means that backend isn't running: see section 6.</p>
+</div>
+<h3 id="if-you-need-to-re-run-the-wizard">If you need to re-run the wizard<a class="headerlink" href="#if-you-need-to-re-run-the-wizard" title="Permanent link">¶</a></h3>
+<p>Delete <code>setupComplete</code> from <code>settings.json</code> in <code>%APPDATA%\IteraSim</code>, then
+restart the app. <em>Set up later</em> in the wizard opens the app without finishing.</p>
+<h3 id="using-a-different-wsl-distribution">Using a different WSL distribution<a class="headerlink" href="#using-a-different-wsl-distribution" title="Permanent link">¶</a></h3>
+<p>The wizard targets <code>Ubuntu</code>. To use another, set <code>ITERASIM_WSL_DISTRO</code> to its
+name before launching.</p>
+<h3 id="uninstall_1">Uninstall<a class="headerlink" href="#uninstall_1" title="Permanent link">¶</a></h3>
+<p>Remove IteraSim through <strong>Settings → Apps → Installed apps</strong>. That leaves WSL,
+Ubuntu and OpenFOAM in place — remove those separately with
+<code>wsl --unregister Ubuntu</code> if you want the disk space back.</p>
+</div>
+</div>
+</div>
 <h2 id="14-openfoam-detection">1.4 OpenFOAM detection<a class="headerlink" href="#14-openfoam-detection" title="Permanent link">¶</a></h2>
-<p>At first launch, Eddy scans your system for an OpenFOAM installation. If found, the version appears in the bottom-right status bar. If not, you'll see <strong>OpenFOAM: not found</strong> — install it and re-launch:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># Ubuntu / Debian
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo apt install openfoam2312-default
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a># Fedora
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo dnf install openfoam
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a># Arch
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>yay -S openfoam-org
+<p>At first launch Eddy scans for an OpenFOAM installation and shows the version it
+picked in the bottom-right status bar. Eddy ranks installations by what is
+actually <strong>compiled</strong>, not by what the folder is called — so a source checkout
+sitting next to a real install won't fool it.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">Linux</label><label for="__tabbed_5_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>If you see <strong>OpenFOAM: not found</strong>, install it and relaunch:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Ubuntu / Debian</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>openfoam2312-default
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Fedora</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>openfoam
 </code></pre></div>
+<p>If it's installed but still undetected, your OpenFOAM isn't on the login-shell
+PATH — source its <code>etc/bashrc</code> from your <code>~/.bashrc</code>. Eddy detects any version
+whose bashrc is sourced.</p>
+</div>
+<div class="tabbed-block">
+<p>OpenFOAM lives inside WSL and the wizard installs it for you, so this should
+just work.</p>
+<p>If the status bar reads <strong>OpenFOAM: not found</strong>, the Step 2 provisioning
+didn't finish. Re-run the wizard (above), or install it inside Ubuntu by hand:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>wsl<span class="w"> </span>-d<span class="w"> </span>Ubuntu
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>openfoam2412-default
+</code></pre></div>
+<p>The provisioning script tries <code>openfoam2412-default</code> first and falls back to
+older ESI metapackages.</p>
+</div>
+</div>
+</div>
 
 
 
@@ -900,6 +1094,8 @@
     
     
       <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../javascripts/os-detect.js"></script>
       
     
   
